@@ -1,0 +1,51 @@
+{{ user | json }}
+<div class="container">
+
+ <div class="row">    
+<form method="post" #userForm="ngForm" (ngSubmit)="onSubmit(user, userForm)">
+<h1>Add Student</h1>
+	<div class="col-sm-1">
+	</div>
+	<div class="col-sm-10 b">
+	First Name:<br>
+	<input class="form-control" type="text" [class.invalid]="yname.touched && yname.invalid" name="fname" pattern="[a-zA-Z]+" [(ngModel)] = "user.fname" required #yname="ngModel" (change)="getModel(yname)">
+	
+	<div [class.invalid]="yname.touched && yname.invalid" *ngIf="yname.touched && yname.invalid">
+		<span *ngIf="yname.errors.required">First Name is required</span>
+		<span *ngIf="yname.errors.pattern">Only Alphabets are accepted.</span>
+	</div><br>
+	
+	Last Name:<br>
+	<input [(ngModel)] = "user.lname" class="form-control" type="text" name="lname" value="mouse" pattern="[a-zA-Z]+" required #xname="ngModel">
+	
+	<div [class.invalid]="xname.touched && xname.invalid" *ngIf="xname.touched && xname.invalid">
+		<span *ngIf="xname.errors.required">Last Name is required</span>
+		<span *ngIf="xname.errors.pattern">Only Alphabets are accepted.</span>
+	</div><br>
+	
+	Mobile Number:<br>
+	<input class="form-control" type="tel" pattern="(7|8|9)\d{9}" name="phn" [class.invalid]="x2name.touched && x2name.invalid" [(ngModel)]="user.phn" #x2name="ngModel" (change)="getModel(x2name)" required>
+	
+	<div [class.invalid]="x2name.touched && x2name.invalid" *ngIf="x2name.touched && x2name.invalid">
+		<span *ngIf="x2name.errors.required">Phone number is required</span>
+		<span *ngIf="x2name.errors.pattern">Pattern Mismatch..</span>
+	</div><br>
+	
+	Email Id:<br>
+	<input class="form-control" type="email" name="em" [class.invalid]="x1name.touched && x1name.invalid" [(ngModel)]="user.em" #x1name="ngModel" (change)="getModel(x1name)" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required>
+	
+	<div [class.invalid]="x1name.touched && x1name.invalid" *ngIf="x1name.touched && x1name.invalid">
+		<span *ngIf="x1name.errors.required">Email Id is required</span>
+		<span *ngIf="x1name.errors.pattern">Pattern Mismatch..</span>
+	</div><br>
+	
+	Address:<br>
+	<textarea name="address" class="form-control" name="address" required></textarea><br>
+	
+	<button type="submit" class="btn btn-primary btn-lg">Submit</button>
+	</div>
+	<div class="col-sm-1">
+	</div>
+</form>	
+</div>
+</div>
